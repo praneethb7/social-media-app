@@ -9,6 +9,9 @@ import { Link } from "react-router-dom"
 import Logo1 from "@/assets/LUME NSQ.jpg";
 import { signIn } from "@/apiCalls/authCalls"
 import { useNavigate } from "react-router-dom"
+import { SparklesCore } from "@/components/ui/sparkles"
+import { setUserData } from "@/redux/userSlice"
+import { useDispatch } from "react-redux"
 
 interface FormData {
   userName: string;
@@ -17,7 +20,9 @@ interface FormData {
 
 export default function SignIn() {
   const [form, setForm] = useState<FormData>({ userName: "", password: "" })
+
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -25,6 +30,7 @@ export default function SignIn() {
 
   const handleSignIn = async() => {
     const { userName, password } = form;
+    
 
     if(!userName || !password) {
       alert("Please Enter Username and Password");
@@ -34,6 +40,7 @@ export default function SignIn() {
     try {
           const response = await signIn(form);
           console.log("Sign Up Successful", response);
+          dispatch(setUserData(response));
           navigate("/home")
           // Clear the form
           setForm({ userName: "", password: "" });
@@ -44,9 +51,22 @@ export default function SignIn() {
 
   }
 
+    const handleSubmit = (e : React.FormEvent) => {
+      e.preventDefault();
+      handleSignIn();
+    }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black relative">
-
+      <SparklesCore
+                  id="tsparticles"
+                  background="transparent"
+                  minSize={0.9}
+                  maxSize={1.5}
+                  particleDensity={30}
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  particleColor="#E1306C"
+                />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -57,10 +77,14 @@ export default function SignIn() {
           <CardContent className="pt-6 pb-6">
 
             <img className="mx-auto my-0" src={Logo1} alt="Logo"></img>
-            <p className="text-center text-md text-zinc-400 mb-6">Log In to see photos and videos from your friends.</p>
+            <div className="flex flex-col items-center justify-center relative">
+            
+            <p className="text-white">Log In to see photos and videos from</p>
+            <p className="mt-0 mb-1 text-[#E1306C]">your friends.</p>
+            </div>
 
 
-            <div className="flex flex-col space-y-3">
+            <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
               <Input
                 id="userName"
                 name="userName"
@@ -83,11 +107,10 @@ export default function SignIn() {
 
               <Button
                 onClick={handleSignIn}
-                onKeyDown={(e) => e.key === "Enter" && handleSignIn()}
-                className="w-full bg-blue-500 hover:bg-blue-600">
+                className="w-full bg-[#E1306C] rounded-lg hover:bg-[#C13584]">
                 Log In
               </Button>
-            </div>
+            </form>
 
             <div className="relative my-6">
               <Separator className="bg-zinc-700" />
@@ -114,7 +137,7 @@ export default function SignIn() {
         </Card>
       </motion.div>
 
-      <footer className="w-full py-4 text-center text-sm text-zinc-400 absolute bottom-0">
+      <footer className="w-full py-4 text-center text-sm text-zinc-400 absolute bottom-5">
         © 2025 Lume. Made by Praneeth with 🩷
       </footer>
     </div>

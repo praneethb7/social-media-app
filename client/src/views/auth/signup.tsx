@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 import Logo1 from "@/assets/LUME NSQ.jpg";
 import { signUp } from "@/apiCalls/authCalls";
 import { useNavigate } from "react-router-dom"
+import { SparklesCore } from "@/components/ui/sparkles"
 
 interface FormData {
   name: string;
@@ -51,8 +52,22 @@ const SignUp = () => {
     }
   };
 
+  const handleSubmit = (e: React.FormEvent) =>{
+    e.preventDefault();
+    handleSignUp();
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black relative">
+      <SparklesCore
+            id="tsparticles"
+            background="transparent"
+            minSize={0.9}
+            maxSize={1.5}
+            particleDensity={30}
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            particleColor="#E1306C"
+          />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -62,9 +77,11 @@ const SignUp = () => {
         <Card className="bg-black border border-zinc-800 rounded-sm shadow-xl">
           <CardContent className="pt-6 pb-6 rounded-none">
             <img className="mx-auto my-0" src={Logo1} alt="Logo" />
-            <p className="text-center text-md text-zinc-400 mb-6">
-              Sign up to see photos and videos from your friends.
-            </p>
+            <div className="flex flex-col items-center justify-center relative">
+            
+            <p className="text-white">Sign Up to see photos and videos from</p>
+            <p className="mt-0 mb-1 text-[#E1306C]">your friends.</p>
+            </div>
 
             <Button
               variant="outline"
@@ -82,7 +99,7 @@ const SignUp = () => {
             </div>
 
             
-            <div className="flex flex-col space-y-3">
+            <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
               <Input
                 id="name"
                 name="name"
@@ -136,7 +153,7 @@ const SignUp = () => {
               <Button
                 onClick={handleSignUp}
                 onKeyDown={(e) => e.key === "Enter" && handleSignUp()}
-                className="w-full bg-blue-500 hover:bg-blue-600"
+                className="w-full bg-[#E1306C] rounded-lg hover:bg-[#C13584]"
               >
                 Sign Up
               </Button>
@@ -147,12 +164,12 @@ const SignUp = () => {
                   Log In
                 </Link>
               </CardFooter>
-            </div>
+            </form>
           </CardContent>
         </Card>
       </motion.div>
 
-      <footer className="w-full py-4 text-center text-sm text-zinc-400 absolute bottom-0">
+      <footer className="w-full py-4 text-center text-sm text-zinc-400 absolute bottom-5">
         © 2025 Lume. Made by Praneeth with 🩷
       </footer>
     </div>
