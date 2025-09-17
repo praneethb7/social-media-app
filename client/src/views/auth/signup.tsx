@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -57,17 +57,23 @@ const SignUp = () => {
     handleSignUp();
   }
 
+  const sparkles = useMemo(() => (
+  <SparklesCore
+    id="tsparticles"
+    background="transparent"
+    minSize={0.9}
+    maxSize={1.5}
+    particleDensity={30}
+    className="absolute inset-0 w-full h-full pointer-events-none"
+    particleColor="#E1306C"
+  />
+), []);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black relative">
-      <SparklesCore
-            id="tsparticles"
-            background="transparent"
-            minSize={0.9}
-            maxSize={1.5}
-            particleDensity={30}
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            particleColor="#E1306C"
-          />
+      
+      {sparkles}
+      
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
