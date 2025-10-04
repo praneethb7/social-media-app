@@ -8,6 +8,7 @@ export interface User {
   email: string;
   password: string;
   profilePic: string;
+  profileImage: string;
   bio: string;
   followers: string[];
   following: string[];
@@ -21,10 +22,12 @@ export interface User {
 
 interface UserState {
   userData: User | null;
+  profileData: User | null;
 }
 
 const initialState: UserState = {
   userData: null,
+  profileData: null,
 };
 
 const userSlice = createSlice({
@@ -34,11 +37,14 @@ const userSlice = createSlice({
     setUserData: (state, action: PayloadAction<User | null>) => {
       state.userData = action.payload;
     },
-    clearUser: (state) => {
-      state.userData = null;
+    // clearUser: (state) => {
+    //   state.userData = null;
+    // },
+    setProfileData: (state, action: PayloadAction<User | null>) => {
+      state.profileData = action.payload
     },
   },
 });
 
-export const { setUserData, clearUser } = userSlice.actions;
+export const { setUserData, setProfileData } = userSlice.actions;
 export default userSlice.reducer;

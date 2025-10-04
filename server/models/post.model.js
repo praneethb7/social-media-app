@@ -6,32 +6,32 @@ const postSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
-        required,
+        required: true,
     },
 
     // type
     mediaType: {
         type: String,
         enum: ['image', 'video'],
-        required,
+        required: true,
     },
-    mediaUrl:{
-        type:String,
-        required,
+    mediaUrl: {
+        type: String,
+        required: true,
     },
 
     // caption
-    caption:{
-        type:String,
-        default:''
+    caption: {
+        type: String,
+        default: ''
     },
 
     // likes & comments 
     likes: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"user",
-            required,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user",
+            required: true,
         }
     ],
     comments: [
@@ -39,11 +39,11 @@ const postSchema = new mongoose.Schema({
             user: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "user",
-                required
+                required: true
             },
             text: {
                 type: String,
-                required,
+                required: true,
             },
             createdAt: {
                 type: Date,

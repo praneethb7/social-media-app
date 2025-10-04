@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getCurrentUser } from "@/apiCalls/authCalls";
+import { getCurrentUser } from "@/apiCalls/userCalls";
 import { useDispatch } from "react-redux";
 import { setUserData } from "@/redux/userSlice";
 import type { AppDispatch } from "@/redux/store";

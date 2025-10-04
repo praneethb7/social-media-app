@@ -7,6 +7,8 @@ import ForgotPassword from "./views/auth/ForgotPassword"
 import useCurrentUser from "./hooks/useCurrentUser"
 import { useSelector } from "react-redux"
 import type { RootState } from "@/redux/store";
+import Profile from "./views/Profile"
+import Upload from "./views/Upload"
 
 function App() {
   useCurrentUser();
@@ -20,6 +22,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path='/profile/:userName' element={<Profile/>}/>
+        <Route path='/upload' element={<Upload/>}/>
       </Routes>
     </BrowserRouter>
 

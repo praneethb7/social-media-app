@@ -77,7 +77,7 @@ export default function SignIn() {
         transition={{ duration: 0.4 }}
         className="w-[350px]"
       >
-        <Card className="bg-black border border-zinc-800 rounded-sm shadow-xl">
+        <Card className="bg-black border border-zinc-800 rounded-sm shadow-xl relative z-10">
           <CardContent className="pt-6 pb-6">
 
             <img className="mx-auto my-0" src={Logo1} alt="Logo"></img>

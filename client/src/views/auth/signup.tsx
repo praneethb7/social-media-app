@@ -80,7 +80,7 @@ const SignUp = () => {
         transition={{ duration: 0.4 }}
         className="w-[350px]"
       >
-        <Card className="bg-black border border-zinc-800 rounded-sm shadow-xl">
+        <Card className="bg-black border border-zinc-800 rounded-sm shadow-xl relative z-10">
           <CardContent className="pt-6 pb-6 rounded-none">
             <img className="mx-auto my-0" src={Logo1} alt="Logo" />
             <div className="flex flex-col items-center justify-center relative">
