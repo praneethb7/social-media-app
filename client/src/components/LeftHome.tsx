@@ -9,18 +9,24 @@ import {
   User,
   LogOut,
 } from "lucide-react";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/redux/store";
 
-const menuItems = [
-  { icon: Home, label: "Home", to: "/home" },
-  { icon: Search, label: "Search", to: "/search" },
-  { icon: Compass, label: "Explore", to: "/explore" },
-  { icon: MessageCircle, label: "Messages", to: "/messages" },
-  { icon: Heart, label: "Notifications", to: "/notifications" },
-  { icon: PlusSquare, label: "Create", to: "/upload" },
-  { icon: User, label: "Profile", to: "/profile" },
-];
+
 
 export default function LeftHome() {
+  const { userData } = useSelector((state: RootState) => state.user);
+
+  const menuItems = [
+    { icon: Home, label: "Home", to: "/home" },
+    { icon: Search, label: "Search", to: "/search" },
+    { icon: Compass, label: "Explore", to: "/explore" },
+    { icon: MessageCircle, label: "Messages", to: "/messages" },
+    { icon: Heart, label: "Notifications", to: "/notifications" },
+    { icon: PlusSquare, label: "Create", to: "/upload" },
+    { icon: User, label: "Profile", to: `/profile/${userData?.userName}` },
+  ];
+
   return (
     <div className="flex flex-col justify-between h-screen w-62 bg-black text-white border-r border-stone-800">
       <div>

@@ -4,6 +4,7 @@ import type { RootState } from "@/redux/store";
 import Nav from "@/components/Nav";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { useMemo } from "react";
+import LeftHome from "@/components/LeftHome";
 
 
 
@@ -24,14 +25,17 @@ const Home = () => {
   ), []);
 
   return (
-    <div className="min-h-screen bg-black relative">
-     
+    <div className="min-h-screen bg-black flex relative">
+
       {sparkles}
-     <p className="text-white text-xl font-semibold p-[10px]">{userData?.userName}</p>
-     <p className="text-white text-xl font-semibold p-[10px]">{userData?.name ?? "Guest"}</p>
-    <Nav/>
+
+      <div className="z-20 flex-none">
+        <LeftHome />
+      </div>
+
+      <Nav />
     </div>
-   
+
   );
 };
 
