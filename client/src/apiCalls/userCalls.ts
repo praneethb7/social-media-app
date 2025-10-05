@@ -25,11 +25,14 @@ export const getProfile = async (userName: string) => {
   }
 }
 
-export const editProfile = async (userName: string) => {
+export const editProfile = async (data : FormData) => {
   try {
-
-  } catch (e) {
-    console.log(e);
+    const response = await api.post(`/api/user/editprofile/`, data, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error:any) {
+    throw error.response?.data?.message || "Failed to fetch user data";
   }
-}
+};
 

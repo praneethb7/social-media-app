@@ -11,7 +11,7 @@ import postRouter from './routes/post.routes.js';
 dotenv.config();
 
 const app = express();
-const PORT =  8000;
+const PORT = 8000;
 
 // Connect to MongoDB
 connectDB();
@@ -21,15 +21,15 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true,
+  origin: "http://localhost:5173",
+  credentials: true,
 }));
 
 
 // Routes
-app.use('/api/auth' , authRouter)
-app.use('/api/user',userRouter)
-app.use('/api/post',postRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/user', userRouter)
+app.use('/api/post', postRouter)
 
 
 // Start server

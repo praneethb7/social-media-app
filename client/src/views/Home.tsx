@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import useCurrentUser from "@/hooks/useCurrentUser";
-import type { RootState } from "@/redux/store";
+// import type { RootState } from "@/redux/store";
 import Nav from "@/components/Nav";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { useMemo } from "react";
@@ -10,7 +10,7 @@ import LeftHome from "@/components/LeftHome";
 
 const Home = () => {
   useCurrentUser();
-  const { userData } = useSelector((state: RootState) => state.user);
+  // const { userData } = useSelector((state: RootState) => state.user);
 
   const sparkles = useMemo(() => (
     <SparklesCore

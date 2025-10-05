@@ -2,6 +2,7 @@
 
 import uploadOnCloud from "../config/cloudinary.js";
 import User from "../models/user.model.js";
+import Post from "../models/post.model.js";
 
 export const uploadPost = async (req, res) => {
     // media file 
@@ -11,7 +12,7 @@ export const uploadPost = async (req, res) => {
 
     let mediaUrl = '';
     if (req.file) {
-        mediaUrl = uploadOnCloud(req.file.path);
+        mediaUrl = await uploadOnCloud(req.file.path);
     } else {
         return res.status(404).json({ message: "No media file found" });
     }
@@ -20,7 +21,7 @@ export const uploadPost = async (req, res) => {
 
         // userdata 
         // profilepic 
-        const user = User.findById(req.userId).populate('posts');
+        const user = await User.findById(req.userId).populate('posts');
         user.posts.push(post._id);
         await user.save();
 
@@ -28,7 +29,7 @@ export const uploadPost = async (req, res) => {
 
         return res.status(201).json(popPost);
     } catch (e) {
-        console.log(e);
+        return res.status(500).json(e);
     }
 }
 

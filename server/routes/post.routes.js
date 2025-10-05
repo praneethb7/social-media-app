@@ -6,7 +6,7 @@ import { upload } from "../middlewares/multer.js";
 
 const postRouter = express.Router();
 
-postRouter.post('/upload', isAuth, upload.single('mediaurl'), uploadPost);
+postRouter.post('/upload', isAuth, upload.single('mediaUrl'), uploadPost);
 postRouter.get("/getallposts",getAllPosts);
 
 export default postRouter;

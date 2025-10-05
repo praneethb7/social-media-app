@@ -1,26 +1,25 @@
 import { FloatingNav } from "./ui/floating-navbar";
-import { IconMessage, IconPlus } from "@tabler/icons-react";
-
+import { PlusSquare, MessageCircle } from "lucide-react";
 
 
 function Nav() {
-    const navItems = [
-      {
-        name: "Messages",
-        link: "/messages",
-        icon:(
-          <IconMessage className="h-4 w-4 text-neutral-500 dark:text-white"/>
-        )
-      },
+  const navItems = [
+    {
+      name: "Messages",
+      link: "/messages",
+      icon: (
+        <MessageCircle className="h-5 w-5" />
+      )
+    },
     {
       name: "Create",
       link: "/upload",
       icon: (
-        <IconPlus className="h-4 w-4 text-neutral-500 dark:text-white" />
+        <PlusSquare className="h-5 w-6" />
       ),
     },
   ];
-    return (<FloatingNav navItems={navItems} className=""/>)
+  return (<FloatingNav navItems={navItems} />)
 }
 
 export default Nav;
