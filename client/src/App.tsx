@@ -10,9 +10,14 @@ import type { RootState } from "@/redux/store";
 import Profile from "./views/Profile"
 import UploadPost from "./views/Upload"
 import EditProfile from "./views/EditProfile"
+import usePostData from "./hooks/usePostData"
+import getSuggestedUsers from "./hooks/getSuggestedUsers"
 
 function App() {
   useCurrentUser();
+  usePostData();
+  getSuggestedUsers();
+  
   const { userData } = useSelector((state: RootState) => state.user);
 
   return (

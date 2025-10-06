@@ -23,11 +23,13 @@ export interface User {
 interface UserState {
   userData: User | null;
   profileData: User | null;
+  suggestedUsers: User | null;
 }
 
 const initialState: UserState = {
   userData: null,
   profileData: null,
+  suggestedUsers: null,
 };
 
 const userSlice = createSlice({
@@ -43,8 +45,11 @@ const userSlice = createSlice({
     setProfileData: (state, action: PayloadAction<User | null>) => {
       state.profileData = action.payload
     },
+    setSuggestedUsers:(state,action: PayloadAction<User | null>) => {
+       state.suggestedUsers = action.payload
+    }
   },
 });
 
-export const { setUserData, setProfileData } = userSlice.actions;
+export const { setUserData, setProfileData, setSuggestedUsers } = userSlice.actions;
 export default userSlice.reducer;

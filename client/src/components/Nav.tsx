@@ -19,7 +19,7 @@ function Nav() {
       ),
     },
   ];
-  return (<FloatingNav navItems={navItems} />)
+  return (<FloatingNav navItems={navItems}/>)
 }
 
 export default Nav;

@@ -29,3 +29,12 @@ export const getAllPosts = async ()=>{
     throw error.response?.data?.message || "Failed to fetch Posts";
   } 
 }
+
+export const likePost = async(postId:string)=>{
+  try{
+    const response = await api.post(`/api/post/like/${postId}`,  {}, { withCredentials: true })
+    return response.data;
+  } catch(e:any){
+     throw e.response?.data?.message || "Failed to Like"
+  }
+}

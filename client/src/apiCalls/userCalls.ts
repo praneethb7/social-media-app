@@ -36,3 +36,11 @@ export const editProfile = async (data : FormData) => {
   }
 };
 
+export const getSuggestions = async () => {
+  try{
+    const response = await api.get(`/api/user/suggested`)
+    return response.data;
+  } catch(e:any){
+    throw e.response?.data?.message || "Failed to get users"
+  }
+}

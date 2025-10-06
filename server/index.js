@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import userRouter from './routes/user.routes.js';
 import cors from "cors";
 import postRouter from './routes/post.routes.js';
+import followRouter from './routes/followers.routes.js';
 
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use(cors({
 app.use('/api/auth', authRouter)
 app.use('/api/user', userRouter)
 app.use('/api/post', postRouter)
+app.use('/api/follow', followRouter)
 
 
 // Start server

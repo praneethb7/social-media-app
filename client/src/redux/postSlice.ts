@@ -1,13 +1,13 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-// Define a type for your Post data
+
 export interface Post {
   _id: string;
   caption?: string;
   imageUrl?: string;
   type?: "post" | "story" | "reel";
   createdAt?: string;
-  [key: string]: any; // for flexibility
+  [key: string]: any; 
 }
 
 interface PostState {
@@ -24,7 +24,7 @@ const postSlice = createSlice({
   reducers: {
     setPostData: (state, action: PayloadAction<Post[]>) => {
       state.postData = action.payload;
-    },
+  },
 
     updatePost: (state, action: PayloadAction<Post>) => {
       const updatedPost = action.payload;

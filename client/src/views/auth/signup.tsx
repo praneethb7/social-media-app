@@ -25,53 +25,64 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setError(""); // Clear error when user types
   };
 
   const handleSignUp = async () => {
     const { name, userName, email, password } = form;
-    console.log(form)
+    console.log("Form data being sent:", form);
 
     if (!name || !userName || !email || !password) {
-      alert("Please fill all the fields");
+      setError("Please fill all the fields");
       return;
     }
+
+    setLoading(true);
+    setError("");
 
     try {
       const response = await signUp(form);
       console.log("Sign Up Successful", response);
-      navigate("/home")
+      navigate("/home");
       // Clear the form
       setForm({ name: "", userName: "", email: "", password: "" });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error during sign up", error);
-      alert("Sign Up Failed. Please try again.");
+      
+      
+      if (error.response) { 
+        console.log("Error response:", error.response.data);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) =>{
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     handleSignUp();
   }
 
   const sparkles = useMemo(() => (
-  <SparklesCore
-    id="tsparticles"
-    background="transparent"
-    minSize={0.9}
-    maxSize={1.5}
-    particleDensity={30}
-    className="absolute inset-0 w-full h-full pointer-events-none"
-    particleColor="#E1306C"
-  />
-), []);
+    <SparklesCore
+      id="tsparticles"
+      background="transparent"
+      minSize={0.9}
+      maxSize={1.5}
+      particleDensity={30}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      particleColor="#E1306C"
+    />
+  ), []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black relative">
-      
       {sparkles}
       
       <motion.div
@@ -84,9 +95,8 @@ const SignUp = () => {
           <CardContent className="pt-6 pb-6 rounded-none">
             <img className="mx-auto my-0" src={Logo1} alt="Logo" />
             <div className="flex flex-col items-center justify-center relative">
-            
-            <p className="text-white">Sign Up to see photos and videos from</p>
-            <p className="mt-0 mb-1 text-[#E1306C]">your friends.</p>
+              <p className="text-white">Sign Up to see photos and videos from</p>
+              <p className="mt-0 mb-1 text-[#E1306C]">your friends.</p>
             </div>
 
             <Button
@@ -104,7 +114,13 @@ const SignUp = () => {
               </span>
             </div>
 
-            
+            {/* Error Message */}
+            {error && (
+              <div className="mb-4 p-3 bg-red-900/20 border border-red-500 rounded text-red-400 text-sm">
+                {error}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
               <Input
                 id="name"
@@ -155,13 +171,12 @@ const SignUp = () => {
                 <a href="" className="text-blue-500 hover:underline">Cookies Policy</a>
               </div>
 
-              
               <Button
-                onClick={handleSignUp}
-                onKeyDown={(e) => e.key === "Enter" && handleSignUp()}
-                className="w-full bg-[#E1306C] rounded-lg hover:bg-[#C13584]"
+                type="submit"
+                disabled={loading}
+                className="w-full bg-[#E1306C] rounded-lg hover:bg-[#C13584] disabled:opacity-50"
               >
-                Sign Up
+                {loading ? "Signing Up..." : "Sign Up"}
               </Button>
 
               <CardFooter className="justify-center text-sm text-zinc-400 border-t border-zinc-800 py-4 rounded-none">

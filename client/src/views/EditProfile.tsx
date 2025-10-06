@@ -102,7 +102,7 @@ function EditProfile() {
           </div>
     
 
-    <div className="min-w-4xl mx-60 min-h-screen bg-black relative flex items-center px-4">
+    <div className="min-w-4xl mx-auto min-h-screen bg-black relative flex items-center px-4">
      
 
       <div className="w-full max-w-2xl bg-black rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.25)] p-6 flex flex-col gap-6 relative z-10">

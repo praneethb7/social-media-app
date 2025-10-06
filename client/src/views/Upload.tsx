@@ -5,16 +5,14 @@ import { SparklesCore } from "@/components/ui/sparkles";
 import { ChevronLeft, Upload, Video, Image, Clapperboard, Loader2 } from "lucide-react";
 import LeftHome from "@/components/LeftHome";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createPost } from "@/apiCalls/postCalls";
 import { setPostData } from "@/redux/postSlice";
-import type { RootState } from "@/redux/store";
 
 function UploadPost() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const { postData } = useSelector((state: RootState) => state.post);
 
   const [uploadType, setUploadType] = useState<"post" | "story" | "reel">("post");
   const [preview, setPreview] = useState<string | null>(null);
@@ -50,7 +48,7 @@ function UploadPost() {
       formData.append("caption", caption);
 
       const result = await createPost(formData);
-      dispatch(setPostData([...postData, result]));
+      dispatch(setPostData(result));
 
       setCaption("");
       setPreview(null);
@@ -88,7 +86,7 @@ function UploadPost() {
       </div>
 
       {/* Main upload area */}
-      <div className="min-w-4xl mx-35 min-h-screen bg-black relative flex items-center justify-center px-4">
+      <div className="min-w-4xl mx-auto min-h-screen bg-black relative flex items-center justify-center px-4">
         <div className="w-full max-w-2xl bg-black rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.25)] p-6 flex flex-col gap-6 relative z-10">
 
           {/* Header */}
